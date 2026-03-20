@@ -4,6 +4,7 @@ describe('POST /login', () => {
   before(() => {
     cy.fixture('usuarios').then((data) => {
       usuarios = data
+      cy.criarUsuario(usuarios.fulano)
     })
   })
 

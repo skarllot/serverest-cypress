@@ -1,7 +1,9 @@
 {
   "fulano": {
+    "nome": "Fulano da Silva",
     "email": "fulano@qa.com",
-    "password": "teste"
+    "password": "teste",
+    "administrador": "true"
   },
   "credenciaisInvalidas": {
     "email": "nao.existe@qa.com.br",
