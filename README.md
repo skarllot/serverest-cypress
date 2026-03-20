@@ -1,6 +1,6 @@
 # serverest-cypress
 
-Cypress E2E test suite for the [ServeRest REST API](https://serverest.dev/) using `cy.request()`.
+Cypress E2E test suite for the [ServeRest REST API](https://serverest.dev/) and its [front-end](https://front.serverest.dev/).
 
 ## Requirements
 
@@ -23,25 +23,17 @@ npm test
 npm run cy:open
 
 # Single spec
-npx cypress run --spec 'cypress/e2e/login/login.cy.js'
+npx cypress run --spec 'cypress/e2e/back-end/login/login.cy.js'
 ```
 
 ## Project Structure
 
 ```
 cypress/
-├── e2e/          # Test specs
-├── fixtures/     # Test data
+├── e2e/
+│   ├── back-end/   # API specs (cy.request only)
+│   └── front-end/  # UI specs
+├── fixtures/       # Test data
 └── support/
-    └── commands/ # Custom cy.* commands
+    └── commands/   # Custom cy.* commands
 ```
-
-## Custom Commands
-
-| Command | Description |
-|---|---|
-| `cy.loginServeRest(email, password)` | POST /login and store the Bearer token via `cy.task` for later use |
-
-## Notes
-
-- Commands use `failOnStatusCode: false` — assertions are made inside `.then()`.
