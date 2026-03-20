@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Cypress artifacts
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Cypress environment secrets (never commit)
+cypress.env.json
+
+# OS artifacts
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+{
+  "name": "serverest-cypress",
+  "version": "1.0.0",
+  "description": "Cypress E2E test suite for ServeRest REST API",
+  "private": true,
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^15.12.0"
+  }
+}
