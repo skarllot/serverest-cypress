@@ -65,6 +65,38 @@ describe('Front-end: cadastrar produto', () => {
     })
   })
 
+  context('when the admin fills in and submits the product form', () => {
+    it('should redirect to the products list after registration', () => {
+      loginAdmin()
+
+      cy.visit(`${frontUrl}/admin/cadastrarprodutos`)
+
+      cy.get('[data-testid=nome]').type(novoProduto.nome)
+      cy.get('[data-testid=preco]').type(novoProduto.preco)
+      cy.get('[data-testid=descricao]').type(novoProduto.descricao)
+      cy.get('[data-testid=quantity]').type(novoProduto.quantidade)
+      cy.get('[data-testid=cadastarProdutos]').click()
+
+      cy.url().should('eq', `${frontUrl}/admin/listarprodutos`)
+    })
+
+    it('should show the new product in the products table', () => {
+      loginAdmin()
+
+      cy.visit(`${frontUrl}/admin/listarprodutos`)
+
+      cy.get('#root table tbody tr')
+        .contains('td', novoProduto.nome)
+        .parent()
+        .within(() => {
+          cy.get('td').eq(0).should('have.text', novoProduto.nome)
+          cy.get('td').eq(1).should('have.text', String(novoProduto.preco))
+          cy.get('td').eq(2).should('have.text', novoProduto.descricao)
+          cy.get('td').eq(3).should('have.text', String(novoProduto.quantidade))
+        })
+    })
+  })
+
   context('when the admin submits the form with a mandatory field empty', () => {
     beforeEach(() => {
       loginAdmin()
@@ -118,38 +150,6 @@ describe('Front-end: cadastrar produto', () => {
         cy.get('div[role=alert] span').should('contain.text', error)
         cy.url().should('eq', `${frontUrl}/admin/cadastrarprodutos`)
       })
-    })
-  })
-
-  context('when the admin fills in and submits the product form', () => {
-    it('should redirect to the products list after registration', () => {
-      loginAdmin()
-
-      cy.visit(`${frontUrl}/admin/cadastrarprodutos`)
-
-      cy.get('[data-testid=nome]').type(novoProduto.nome)
-      cy.get('[data-testid=preco]').type(novoProduto.preco)
-      cy.get('[data-testid=descricao]').type(novoProduto.descricao)
-      cy.get('[data-testid=quantity]').type(novoProduto.quantidade)
-      cy.get('[data-testid=cadastarProdutos]').click()
-
-      cy.url().should('eq', `${frontUrl}/admin/listarprodutos`)
-    })
-
-    it('should show the new product in the products table', () => {
-      loginAdmin()
-
-      cy.visit(`${frontUrl}/admin/listarprodutos`)
-
-      cy.get('#root table tbody tr')
-        .contains('td', novoProduto.nome)
-        .parent()
-        .within(() => {
-          cy.get('td').eq(0).should('have.text', novoProduto.nome)
-          cy.get('td').eq(1).should('have.text', String(novoProduto.preco))
-          cy.get('td').eq(2).should('have.text', novoProduto.descricao)
-          cy.get('td').eq(3).should('have.text', String(novoProduto.quantidade))
-        })
     })
   })
 })
