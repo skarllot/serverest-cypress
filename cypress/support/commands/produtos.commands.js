@@ -1,3 +1,11 @@
+Cypress.Commands.add('listarProdutos', () => {
+  return cy.request({
+    method: 'GET',
+    url: '/produtos',
+    failOnStatusCode: false,
+  })
+})
+
 Cypress.Commands.add('criarProduto', (produto) => {
   return cy.task('get', ['authToken']).then(({ authToken }) => {
     return cy.request({

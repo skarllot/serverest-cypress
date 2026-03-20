@@ -4,6 +4,9 @@ const store = {}
 
 module.exports = defineConfig({
   allowCypressEnv: false,
+  expose: {
+    frontUrl: 'https://front.serverest.dev',
+  },
   requestTimeout: 10000,
   responseTimeout: 30000,
   retries: { runMode: 2, openMode: 0 },

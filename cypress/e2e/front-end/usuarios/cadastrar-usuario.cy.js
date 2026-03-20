@@ -1,4 +1,4 @@
-const FRONT_URL = 'https://front.serverest.dev'
+const { frontUrl } = Cypress.expose()
 
 describe('Front-end: cadastrar usuário', () => {
   let adminUser
@@ -44,11 +44,11 @@ describe('Front-end: cadastrar usuário', () => {
     cy.session(
       adminUser.email,
       () => {
-        cy.visit(`${FRONT_URL}/login`)
+        cy.visit(`${frontUrl}/login`)
         cy.get('[data-testid=email]').type(adminUser.email)
         cy.get('[data-testid=senha]').type(adminUser.password)
         cy.get('[data-testid=entrar]').click()
-        cy.url().should('eq', `${FRONT_URL}/admin/home`)
+        cy.url().should('eq', `${frontUrl}/admin/home`)
       },
     )
   }
@@ -57,9 +57,9 @@ describe('Front-end: cadastrar usuário', () => {
     it('should complete the registration flow and redirect to the users list', () => {
       loginAdmin()
 
-      cy.visit(`${FRONT_URL}/admin/home`)
+      cy.visit(`${frontUrl}/admin/home`)
       cy.get('[data-testid=cadastrarUsuarios]').click()
-      cy.url().should('eq', `${FRONT_URL}/admin/cadastrarusuarios`)
+      cy.url().should('eq', `${frontUrl}/admin/cadastrarusuarios`)
 
       cy.get('[data-testid=nome]').type(novoUsuario.nome)
       cy.get('[data-testid=email]').type(novoUsuario.email)
@@ -67,13 +67,13 @@ describe('Front-end: cadastrar usuário', () => {
       cy.get('[data-testid=checkbox]').check()
       cy.get('[data-testid=cadastrarUsuario]').click()
 
-      cy.url().should('eq', `${FRONT_URL}/admin/listarusuarios`)
+      cy.url().should('eq', `${frontUrl}/admin/listarusuarios`)
     })
 
     it('should show the new user with all columns in the users table', () => {
       loginAdmin()
 
-      cy.visit(`${FRONT_URL}/admin/listarusuarios`)
+      cy.visit(`${frontUrl}/admin/listarusuarios`)
 
       cy.get('#root table tbody tr')
         .contains('td', novoUsuario.nome)
