@@ -1,0 +1,13 @@
+{
+  "fulano": {
+    "email": "fulano@qa.com",
+    "password": "teste"
+  },
+  "credenciaisInvalidas": {
+    "email": "nao.existe@qa.com.br",
+    "password": "senhaerrada"
+  },
+  "credenciaisIncompletas": {
+    "email": "incompleto@qa.com.br"
+  }
+}
